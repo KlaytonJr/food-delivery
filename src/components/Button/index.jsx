@@ -1,8 +1,8 @@
 import React from 'react'
 
-function Button() {
+function Button({ children, className }) {
   return (
-    <div>Button</div>
+    <div className={className} >{ children }</div>
   )
 }
 
