@@ -48,15 +48,43 @@ export default function CartProvider({ children }) {
     
     return quantity;
   }
+  
+  // Função pegar total do cart
+  function cartTotal() {
+    return cart.reduce((acc, item) => acc + item.quantity * item.price, 0);
+  }
+
+  // Função para adicionar 1 na quantidade do item no carrinho
+  function addItem(id) {
+    setCart((prevCart) => {
+      const updatedCart = prevCart.map((obj) =>
+        obj.id === id ? { ...obj, quantity: obj.quantity + 1 } : obj
+      );
+      return updatedCart;
+    });
+  }
+
+  // Função para remover 1 na quantidade do item no carrinho
+  function removeItem(id) {
+    setCart((prevCart) => {
+      const updatedCart = prevCart.map((obj) =>
+        obj.id === id && obj.quantity > 0 ? { ...obj, quantity: obj.quantity - 1 } : obj
+      );
+      return updatedCart;
+    });
+  }
+
+  // Função para limpar cart
+  function cleanCart() {
+    setCart([]);
+  }
 
   // O que dá para adicionar ?
   // - Salvar no localStorage ou Cache
   // - Pegar do localStorage ou Cache
-  // - Pegar quantidade de itens no cart
-  // - Excluir todos os items -> setCart([])
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, isInCart, cartQtd }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, isInCart, cartQtd, cartTotal, addItem, removeItem, cleanCart }}>
       { children }
     </CartContext.Provider>
   );

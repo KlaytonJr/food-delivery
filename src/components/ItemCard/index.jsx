@@ -39,7 +39,7 @@ function ItemCard({ item }) {
             )
         }
 
-        <img className='h-36 w-full object-cover' src={item.imageUrl} alt=''></img>
+        <img className='h-36 w-full object-cover rounded' src={item.imageUrl} alt=''></img>
 
         <h1 className='text-md text-slate-700 font-semibold mt-2'>{ item.name }</h1>
         <p className='text-xs text-slate-600'>{ item.description }</p>
