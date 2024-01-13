@@ -4,6 +4,7 @@ import Search from '../../components/Search'
 import Pills from '../../components/Pills'
 import ItemCard from '../../components/ItemCard'
 import { useParams, useSearchParams } from 'react-router-dom'
+import { Comments } from '@hyvor/hyvor-talk-react';
 
 const allProducts = [
     {
@@ -244,7 +245,14 @@ function Menu() {
 
         {activeTab === 'reviews' && (
             <>
-                "Reviews"
+                <Comments
+                    website-id={10295}
+                    page-id="1"
+                    on={{
+                        'loaded': () => console.log('Comments loaded'),
+                        'comment:published': (comment) => console.log('Comment published', comment),
+                    }}
+                />
             </>
         )}
     </div>

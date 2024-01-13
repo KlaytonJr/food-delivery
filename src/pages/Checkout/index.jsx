@@ -5,6 +5,7 @@ import Input from "../../components/Input";
 import CartItem from "../../components/CartItem";
 import { Check } from 'feather-icons-react'
 import Button from "../../components/Button";
+import toast, { Toaster } from "react-hot-toast";
 
 const coupons = ["klay_20", "food_30"]
 
@@ -29,6 +30,8 @@ function Checkout() {
       const splitCoupon = foundCoupon.split(/[-_]/);
       const discountValue = parseInt(splitCoupon[1], 10);
       setDiscount(discountValue);
+
+      toast.success('Desconto aplicado!')
     } else {
       setDiscount(null);
     }
@@ -42,11 +45,31 @@ function Checkout() {
         total: cartTotal() + 10 - (discount || 0),
         discount,
         coupon
-    })
+    });
+
+    cleanCart();
+
+    setDiscount(0);
+    setCoupon("");
+    setPayment("");
+    setAddress({
+        cep: '',
+        street: '',
+        number: '',
+        city: '',
+        neighborhood: '',
+        state: '',
+    });
+
+    toast.success('Pedido efetuado!')
   }
 
   return (
     <div className="px-10 py-1 2xl:py-2">
+        <Toaster
+            position="top-center"
+            reverseOrder={false}
+        />
         {/* <div className="text-slate-700 mb-2">
             <ArrowLeft24Filled />
             <span className="ml-2">Voltar</span>
