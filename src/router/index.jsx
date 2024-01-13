@@ -11,7 +11,7 @@ function Router() {
             <Header />
             <Routes>
                 <Route exact path="/" element={<Home />} />
-                <Route exact path="/menu" element={<Menu />} />
+                <Route exact path="/menu/:filter?" element={<Menu />} />
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/orders" element={<Orders />} />
             </Routes>

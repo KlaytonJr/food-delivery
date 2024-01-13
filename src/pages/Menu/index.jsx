@@ -51,7 +51,7 @@ function Menu() {
         // More Massas
         {
             id: 4,
-            type: 'massa',
+            type: 'pasta',
             name: 'Lasanha Bolonhesa',
             description: 'Massa de lasanha, molho bolonhesa, muçarela e parmesão',
             price: 64.90,
@@ -64,7 +64,7 @@ function Menu() {
         },
         {
             id: 5,
-            type: 'massa',
+            type: 'pasta',
             name: 'Spaghetti Carbonara',
             description: 'Spaghetti, molho de ovos, bacon, queijo parmesão e pimenta preta',
             price: 56.90,
@@ -78,7 +78,7 @@ function Menu() {
         // More Pães Artesanais
         {
             id: 6,
-            type: 'pão artesanal',
+            type: 'bread',
             name: 'Pão de Alho',
             description: 'Pão artesanal com alho e ervas finas',
             price: 12.90,
@@ -91,7 +91,7 @@ function Menu() {
         },
         {
             id: 7,
-            type: 'pão artesanal',
+            type: 'bread',
             name: 'Pão Integral',
             description: 'Pão artesanal integral com sementes',
             price: 15.90,
@@ -105,7 +105,7 @@ function Menu() {
         // More Sobremesas
         {
             id: 8,
-            type: 'sobremesa',
+            type: 'dessert',
             name: 'Tiramisu',
             description: 'Sobremesa italiana com biscoitos champagne, café, queijo mascarpone e cacau',
             price: 34.90,
@@ -118,7 +118,7 @@ function Menu() {
         },
         {
             id: 9,
-            type: 'sobremesa',
+            type: 'dessert',
             name: 'Pudim de Leite',
             description: 'Pudim de leite condensado caseiro',
             price: 22.90,
@@ -132,7 +132,7 @@ function Menu() {
         // More Bebidas
         {
             id: 10,
-            type: 'bebida',
+            type: 'drink',
             name: 'Refrigerante Cola',
             description: 'Refrigerante sabor cola',
             price: 5.90,
@@ -145,7 +145,7 @@ function Menu() {
         },
         {
             id: 11,
-            type: 'bebida',
+            type: 'drink',
             name: 'Suco de Laranja Natural',
             description: 'Suco de laranja espremido na hora',
             price: 8.90,
@@ -158,6 +158,15 @@ function Menu() {
         },
     ];
     
+    // Criar array com os tipos únicos de produtos
+    const uniqueProductTypes = new Set();
+    const pills = products.map((product) => {
+        if (!uniqueProductTypes.has(product.type)) {
+            uniqueProductTypes.add(product.type);
+            return product.type;
+        }
+        return null;
+    }).filter((type) => type !== null);
 
   return (
     <div className='py-5 px-40'>
@@ -177,7 +186,7 @@ function Menu() {
         {activeTab === 'informations' && (
             <>
                 <Search />
-                <Pills />
+                <Pills types={pills} />
         
                 { products.map((item, index) => <ItemCard key={index} item={item} />) }
             </>
