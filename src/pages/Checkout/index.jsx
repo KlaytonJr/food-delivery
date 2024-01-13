@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import { useCart } from "../../context/CartProvider";
 
 function Checkout() {
-  return (
-    <div>Checkout</div>
-  )
+  const { cart } = useCart();
+
+  console.log(cart);
+
+  return <div>Checkout</div>;
 }
 
-export default Checkout
+export default Checkout;

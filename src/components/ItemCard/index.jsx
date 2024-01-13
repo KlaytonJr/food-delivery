@@ -1,12 +1,18 @@
 import React, { useState } from 'react'
 import Button from '../Button'
 import { FireFilled } from '@fluentui/react-icons';
+import { useCart } from '../../context/CartProvider';
 
 function ItemCard({ item }) {
+    const { addToCart } = useCart();
+
     const [quantity, setQuantity] = useState(0);
 
-    function addToCart() {
-
+    function submit() {
+        addToCart({
+            ...item,
+            quantity
+        })
     }
 
   return (
@@ -75,7 +81,7 @@ function ItemCard({ item }) {
 
             <Button 
                 className="bg-amber-400 rounded px-3 py-1 text-slate-800 font-semibold text-xs cursor-pointer hover:bg-amber-500"
-                onClick={addToCart}
+                onClick={submit}
             >
                 <p>Adicionar +</p>
             </Button>
