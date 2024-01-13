@@ -51,7 +51,7 @@ export default function CartProvider({ children }) {
   
   // Função pegar total do cart
   function cartTotal() {
-    return cart.reduce((acc, item) => acc + item.quantity * item.price, 0);
+    return cart.reduce((acc, item) => acc + item.quantity * (item.priceWithDiscount || item.price), 0);
   }
 
   // Função para adicionar 1 na quantidade do item no carrinho

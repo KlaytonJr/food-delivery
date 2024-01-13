@@ -24,19 +24,26 @@ function Checkout() {
   });
 
   const applyCoupon = () => {
-    console.log(coupon)
     const foundCoupon = coupons.find((c) => c === coupon);
-    console.log(foundCoupon)
     if (foundCoupon) {
       const splitCoupon = foundCoupon.split(/[-_]/);
-      console.log(splitCoupon);
       const discountValue = parseInt(splitCoupon[1], 10);
-      console.log(discountValue);
       setDiscount(discountValue);
     } else {
       setDiscount(null);
     }
   };
+
+  const submit = () => {
+    console.log({
+        products: cart,
+        address,
+        payment,
+        total: cartTotal() + 10 - (discount || 0),
+        discount,
+        coupon
+    })
+  }
 
   return (
     <div className="px-10 py-1 2xl:py-2">
@@ -197,7 +204,10 @@ function Checkout() {
                         </label>
                     </div>
 
-                    <Button className="w-full bg-amber-400 rounded px-3 py-2 text-slate-800 font-semibold text-lg cursor-pointer mt-6 hover:bg-amber-500">
+                    <Button 
+                        onClick={submit}
+                        className="w-full bg-amber-400 rounded px-3 py-2 text-slate-800 font-semibold text-lg cursor-pointer mt-6 hover:bg-amber-500"
+                    >
                         Finalizar
                     </Button>
 
