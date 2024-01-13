@@ -160,7 +160,7 @@ function Menu() {
     
 
   return (
-    <div className='px-12 py-5'>
+    <div className='py-5 px-40'>
         <ul className='flex gap-5'>
             <li 
                 className={ activeTab === 'informations' ? 'text-red-500 font-bold' : 'text-slate-400 font-medium' && 'cursor-pointer' }
@@ -171,11 +171,23 @@ function Menu() {
                 onClick={() => setActiveTab('reviews')}
             >Avaliações</li>
         </ul>
-        <RestaurantCard />
-        <Search />
-        <Pills />
 
-        { products.map((item, index) => <ItemCard key={index} item={item} />) }
+        <RestaurantCard />
+
+        {activeTab === 'informations' && (
+            <>
+                <Search />
+                <Pills />
+        
+                { products.map((item, index) => <ItemCard key={index} item={item} />) }
+            </>
+        )}
+
+        {activeTab === 'reviews' && (
+            <>
+                "Reviews"
+            </>
+        )}
     </div>
   )
 }
